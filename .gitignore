@@ -1,0 +1,6 @@
+.env
+.git
+.vscode
+env
+chat/__pycache__
+.DS_Store
