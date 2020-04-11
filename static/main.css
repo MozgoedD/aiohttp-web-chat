@@ -31,4 +31,6 @@ body {
 
   #message-input {
     flex-grow: 1;
+    padding: 10px;
+    box-sizing: border-box;
   }

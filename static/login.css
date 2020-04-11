@@ -1,0 +1,10 @@
+body{
+    background-color:white;
+    font-size:14px;
+}
+
+.login{
+    width:300px;
+    max-width:100%;
+    margin:50px auto;
+}

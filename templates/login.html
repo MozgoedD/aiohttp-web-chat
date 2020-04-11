@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Log in
+{% endblock %}
+
+{% block head %}
+    <link href="{{ static('login.css') }}" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+<div class="login">
+  <h2>Login Form</h2>
+  <form id="send-container" action="/login" method="post" accept-charset="utf-8">
+    <input type="text" name="login" id="login-input" placeholder="Enter your Login">
+    <input type="password" id="password-input"  placeholder="Enter your Password">
+    <button type="submit" name="password" id="send-button">Send</button>
+</div>
+{% endblock %}
+
+{% block footer %}
+{% endblock %}
