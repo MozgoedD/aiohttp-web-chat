@@ -1,4 +1,15 @@
 aiohttp==3.6.2
 aiohttp-jinja2==1.2.0
+aiohttp-session==2.9.0
+async-timeout==3.0.1
+attrs==19.3.0
+cffi==1.14.0
+chardet==3.0.4
+cryptography==2.9
+idna==2.9
 Jinja2==2.11.1
-
+MarkupSafe==1.1.1
+multidict==4.7.5
+pycparser==2.20
+six==1.14.0
+yarl==1.4.2
