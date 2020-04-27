@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Log in
+{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{{static('login.css')}}" >
+{% endblock %}
+
+{% block content %}
+<!-- <style>
+  @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;   
+}
+.mountains {
+    background: url('mountains.png');
+    text-align: center;
+    padding: 8em;
+}
+.login-container{
+    background-color: #CDD0E0;
+    text-align: center;
+    padding: 7em 3em;
+}
+label {
+  color: #38676B;
+  font-weight: normal;
+  font-size: larger;
+}
+input {
+  width: 100%;
+  border: 0px solid;
+  box-sizing: border-box;
+  display: block;
+  padding: 0.6em 0;
+}
+button {
+  background-color: #38676B;
+  border: none;
+  width: 100%;
+  margin-top: 1em;
+  color: white;
+  font-family: 'Roboto', sans-serif;   
+  padding: 0.2em 0;
+  font-size: 1em;
+  border-radius: .6em;
+  cursor: pointer;
+}
+</style> -->
+<div class="mountains">
+    <form class="login-container" action="{{ app.router['signin'].url_for() }}" method="post" accept-charset="utf-8">
+      <div class="inputs">
+        <label for="" class="a">login</label>
+        <input type="text" name="login">
+      </div>
+      <div class="inputs">
+        <label for="">password</label>
+        <input type="password" name="password">
+      </div>
+      <button type="submit" id="send-button">create user</button>
+</div>
+{% endblock %}
+
+{% block footer %}
+{% endblock %}

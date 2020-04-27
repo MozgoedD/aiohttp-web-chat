@@ -18,7 +18,6 @@ $ pip install -r requirements.txt
 To run this code just type to console
 
 ```
-$ cd chat/
 $ python3 main.py
  ```
     

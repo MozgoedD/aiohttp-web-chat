@@ -1,0 +1,131 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+
+html, body {
+  height: 100%;
+}
+
+body{
+    padding: 0;
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    display: grid;
+    place-items: center;
+    background-color: #CDD0E0;
+  }
+
+#message-container {
+  margin-top: 1em;
+  justify-self: end;
+}
+
+#message-container div {
+  background-color: #CCC;
+  width: 30vw;
+  padding: 5px;
+  margin-left: 1em;
+  border-radius: .6em;
+  margin-top: .6em;
+  justify-self: end;
+}
+
+#your-message-container {
+  margin-top: 1em;
+}
+
+#your-message-container div {
+  background-color: beige;
+  width: 30vw;
+  padding: 5px;
+  margin-left: 30vw;
+  border-radius: .6em;
+  margin-top: .3em;
+  margin-bottom: .3em;
+}
+
+
+.send-container {
+  padding: 0;
+  margin: 0;
+  grid-area: 'chat-form';
+  display: block;
+}
+
+#message-input {
+  padding: 7px;
+  margin: 0;
+  font-size: 1em;
+  border: none;
+  width: 684%;
+}
+
+.message-input input[type=text]:focus {
+  border: none;
+}
+
+#send-button {
+  border: none;
+  background-color: #38676B;
+  color: white;
+  padding: 5px;
+  width: 200%;
+  margin: 3px;
+  margin-left: 495%;
+}
+
+
+.menu {
+  background-color: white;
+  padding: 1em 1em 0;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 30% auto;
+  grid-area: header;
+}
+
+.buttons {
+  margin-right: -1.5em;
+  padding: 0;
+}
+.menu h1 {
+  text-align: center;
+  font-weight: normal;
+  padding: 0;
+  margin-top: -0.25em;
+  font-size: 2.1em;
+  color: #38676B;
+}
+
+
+.chat {
+  background: url('mountains.png');
+  background-position: 20% 91%;
+  position: relative;
+  min-height: 90vh;
+  background-attachment: fixed;
+  justify-content: end;
+  grid-area: chat;
+  overflow-y: scroll;
+}
+
+.rooms_list {
+  position: relative;
+  margin: 1em 1em;
+  border-radius: .6em;
+  padding: 0 1em;
+  background-color: #E2E3E8;
+  grid-area: rooms;
+  overflow-y: scroll;
+}
+.rooms_list ul{
+  list-style-type: none;
+}
+.grid {
+  display: grid;
+  width: 100vw;
+  height: 100vh;
+  grid-template-columns: repeat(9, 1fr);
+  grid-template-areas:
+      "header header chat chat chat chat chat chat chat"
+      "rooms rooms chat chat chat chat chat chat chat"
+      "rooms rooms chat-form chat-form chat-form chat-form chat-form chat-form chat-form";
+}

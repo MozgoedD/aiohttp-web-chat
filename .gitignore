@@ -3,5 +3,7 @@
 .vscode
 env
 chat/__pycache__
+auth/__pycache__
+auth/__pycache__/views.cpython-38.pyc
 .DS_Store
 __pycache__

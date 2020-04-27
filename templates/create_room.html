@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Log in
+{% endblock %}
+
+{% block head %}
+    <link rel="stylesheet" type="text/css" href="{{static('login.css')}}" >
+{% endblock %}
+
+{% block content %}
+
+<div class="mountains">
+    <form class="login-container" action="{{ app.router['create_room'].url_for() }}" method="post" accept-charset="utf-8">
+      <div class="inputs">
+        <label for="" class="a">room name</label>
+        <input type="text" name="room_name">
+      </div>
+      <button type="submit" id="send-button">create room</button>
+</div>
+{% endblock %}
+
+{% block footer %}
+{% endblock %}

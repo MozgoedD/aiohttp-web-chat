@@ -1,19 +1,49 @@
 {% extends 'base.html' %}
 
 {% block title %}
-Chat App
+web chat
 {% endblock %}
 
 {% block head %}
-    <link href="{{ static('main.css') }}" rel="stylesheet">
+    <link href="{{ url('static', filename='chat.css') }}" rel="stylesheet">
 {% endblock %}
+
 {% block content %}
-<div id="message-container"></div>
-<form id="send-container">
-  <input type="text" id="message-input">
-  <button type="submit" id="send-button">Send</button>
+<div class="grid">
+    <!-- <div class="left"> -->
+      <div class="menu">
+        <section class="buttons">
+          <a href="{{ app.router['logout'].url_for() }}"><img src="{{ url('static', filename='red.png') }}" alt="red"></a>
+          <a href="{{ app.router['create_room'].url_for() }}"><img src="{{ url('static', filename='yellow.png') }}" alt="yellow"></a>
+          <a href="{{ app.router['create_room'].url_for() }}"><img src="{{ url('static', filename='green.png') }}" alt="green"></a>
+        </section>  
+        <h1>@{{user_name}}</h1>
+      </div>
+      <div class="rooms_list">
+          <ul>
+          {% for room in rooms %}
+          <li><a href="{{ app.router['to_chat'].url_for(room=room.get_name()) }}">{{ room.get_name() }}</a></li>
+          {% endfor %}
+          </ul>
+          <!-- <form id="send-container" action="{{ app.router['create_room'].url_for() }}" method="post" accept-charset="utf-8">
+            <input type="text" name="room_name" id="login-input" placeholder="Enter room name">
+            <button type="submit" id="send-button">Create room</button> -->
+      </div>
+    <!-- </div> -->
+
+  <div class="chat">
+    <div id="message-container"></div>
+  </div>
+  <div class="send-container">
+    <form id="send-container">
+      <div class="t"><input type="text" id="message-input"></div>
+      <button type="submit" id="send-button">Send</button>
+  </div>
+</div>
 {% endblock %}
 
 {% block footer %}
-    <script src="{{ static('chat.js') }}"></script>
+    <script type="text/javascript">var user_name = "{{user_name}}";</script>
+    <script type="text/javascript">var WS_URL = "{{ app.router['ws'].url_for(room=room_name) }}";</script>
+    <script src="{{ url('static', filename='chat.js') }}"></script>
 {% endblock %}

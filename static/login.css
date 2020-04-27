@@ -1,10 +1,66 @@
-body{
-    background-color:white;
-    font-size:14px;
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+    background-color: #38676B;
 }
 
-.login{
-    width:300px;
-    max-width:100%;
-    margin:50px auto;
+.mountains {
+    background: url('mountains.png');
+    background-attachment: fixed;
+    background-position: 50% 81%;
+    height: 100vh;
+    width: auto;
+    text-align: center;
+    padding: 10em;
+}
+
+.login-container{
+    background-color: #CDD0E0;
+    width: 400px;
+    height: 200px;
+    position: absolute;
+    transform: translate(-50%, -50%); 
+    top: 50%;
+    left: 50%;
+    text-align: center;
+    padding: 4em;
+}
+label {
+  color: #38676B;
+  font-weight: normal;
+  font-size: 1.7em;
+  margin-top: .7em;
+}
+input {
+  width: 500%;
+  border: 0px solid;
+  box-sizing: border-box;
+  display: block;
+  padding: 0.2em 0;
+  padding-left: 1em;
+  font-size: 1.2em;
+  text-align: center;
+  margin: 1em;
+}
+button {
+    background-color: #38676B;
+    border: none;
+    width: 50%;
+    margin-top: 1em;
+    color: white;
+    font-family: 'Roboto', sans-serif;   
+    padding: 0.2em 0;
+    font-size: 1.4em;
+    border-radius: .6em;
+    cursor: pointer;
+  }
+
+.inputs {
+    display: flex;
+}
+.a {
+    margin-left: 2.2em;
 }

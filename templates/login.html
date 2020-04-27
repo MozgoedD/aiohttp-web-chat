@@ -5,16 +5,22 @@ Log in
 {% endblock %}
 
 {% block head %}
-    <link href="{{ static('login.css') }}" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{{static('login.css')}}" >
 {% endblock %}
 
 {% block content %}
-<div class="login">
-  <h2>Login Form</h2>
-  <form id="send-container" action="/login" method="post" accept-charset="utf-8">
-    <input type="text" name="login" id="login-input" placeholder="Enter your Login">
-    <input type="password" id="password-input"  placeholder="Enter your Password">
-    <button type="submit" name="password" id="send-button">Send</button>
+
+<div class="mountains">
+    <form class="login-container" action="{{ app.router['login'].url_for() }}" method="post" accept-charset="utf-8">
+      <div class="inputs">
+        <label for="" class="a">login</label>
+        <input type="text" name="login">
+      </div>
+      <div class="inputs">
+        <label for="">password</label>
+        <input type="password" name="password">
+      </div>
+      <button type="submit" id="send-button">login</button>
 </div>
 {% endblock %}
 

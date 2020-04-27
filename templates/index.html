@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+
+{% block title %}
+aiohttp secure web chat
+{% endblock %}
+
+{% block head %}
+    <link  href="{{ url('static', filename='index.css') }}" rel="stylesheet">
+    <!-- <style>
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+}
+
+.mountain {
+    background: url("static/mountains.png");
+    background-position: 50% 81%;
+    background-size: 100rem;
+    text-align: center;
+    padding: 8em;
+}
+
+.mountain h1 {
+    font-weight: normal;
+    margin-bottom: 0em;
+    font-size: 5em;
+    color: #38676B;
+}
+
+.mountain h2 {
+    font-weight: normal;
+    margin-top: 0em;
+    font-size: 2.1em;
+    color: #38676B;
+}
+
+.buttons {
+    background-color: #DBD7E3;
+    padding: 3em 9em 10em;
+}
+
+.buttons button {
+    background-color: #38676B;
+    border: none;
+    width: 100%;
+    margin-top: 1em;
+    color: white;
+    font-family: 'Roboto', sans-serif;   
+    padding: 0.2em 0;
+    font-size: 1em;
+    border-radius: .6em;
+    cursor: pointer;
+}
+    </style> -->
+{% endblock %}
+
+{% block content %}
+<div class="grid">
+    <div class="mountain">
+        <section class="main_text">
+            <h1>aiohttp</h1>
+            <h2>secure web chat</h2>
+        </section>
+    </div>
+    <div class="buttons">
+        <a class="a1" href="{{ app.router['login'].url_for() }}"> login </a>
+        <p></p>
+        <a href="{{ app.router['signin'].url_for() }}">sign up</a>
+    </div>
+</div>
+{% endblock %}
+
+{% block footer %}
+
+{% endblock %}
