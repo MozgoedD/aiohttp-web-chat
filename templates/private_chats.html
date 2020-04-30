@@ -14,15 +14,14 @@ web chat
       <div class="menu">
         <section class="buttons">
           <a href="{{ app.router['logout'].url_for() }}"><img src="{{ url('static', filename='red.png') }}" alt="red"></a>
-          <a href="{{ app.router['private_chat'].url_for() }}"><img src="{{ url('static', filename='yellow.png') }}" alt="yellow"></a>
-          <a href="{{ app.router['create_room'].url_for() }}"><img src="{{ url('static', filename='green.png') }}" alt="green"></a>
+          <a href="{{ app.router['chat'].url_for() }}"><img src="{{ url('static', filename='yellow.png') }}" alt="yellow"></a>
         </section>  
-        <h1>@{{user_name}}</h1>
+        <h1>@{{user_name}}:{{conversation}}</h1>
       </div>
       <div class="rooms_list">
           <ul>
-          {% for room in rooms %}
-          <li><a href="{{ app.router['to_chat'].url_for(room=room.get_name()) }}">{{ room.get_name() }}</a></li>
+          {% for user in user_list %}
+          <li><a href="{{ app.router['private_chat_to'].url_for(conversation=user)}}">{{ user }}</a></li>
           {% endfor %}
           </ul>
       </div>
@@ -40,6 +39,6 @@ web chat
 
 {% block footer %}
     <script type="text/javascript">var user_name = "{{user_name}}";</script>
-    <script type="text/javascript">var WS_URL = "{{ app.router['ws'].url_for(room=room_name) }}";</script>
-    <script src="{{ url('static', filename='chat.js') }}"></script>
+    <script type="text/javascript">var WS_URL = "{{ app.router['private_ws'].url_for(conversation=conversation) }}";</script>
+    <script src="{{ url('static', filename='private_chat.js') }}"></script>
 {% endblock %}

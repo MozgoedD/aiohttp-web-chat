@@ -5,6 +5,7 @@ import aiohttp_jinja2
 import json
 
 from chat.models import Message, Room
+from auth.models import User
 
 def redirect(request, router_name):
     url = request.app.router[router_name].url_for()
@@ -27,7 +28,6 @@ class Chat(web.View):
         return {'room_name': '', 'rooms': self.request.app['rooms'], 'user_name': str(session["user"])}
 
 class RoomCreate(web.View):
-
     @aiohttp_jinja2.template('create_room.html')
     async def get(self):
         session = await get_session(self.request)
@@ -45,11 +45,6 @@ class RoomCreate(web.View):
                 self.request.app['rooms'].append(room)
 
             redirect_to_room(self.request, f"{data.get('room_name')}")
-
-class SecretRoomCreate(web.View):
-    pass
-
-
 
 class ChatTo(web.View):
     @aiohttp_jinja2.template('chat.html')
@@ -90,9 +85,8 @@ class WS(web.View):
 
         self.request.app['websockets'].append(ws)
         room.append_ws(ws)
-        print('ws in room', room.get_ws_list())
 
-        print(f'SRV: connection from {session["user"]}')
+        print(f'SRV: connection from {session["user"]} to the room {room.get_name()}')
         async for msg in ws:
             if msg.type == WSMsgType.TEXT:
                 if msg.data == 'close':
@@ -104,12 +98,12 @@ class WS(web.View):
                                 await _ws.send_str(f'{session["user"]}: {msg.data}')
 
             elif msg.type == WSMsgType.ERROR:
-                print('ws connection closed with exception %s' %
-                    ws.exception())
+                print('ws connection closed with exception %s' %ws.exception())
 
         for _ws in room.get_ws_list():
-            await _ws.send_str(f'{session["user"]} has left')
+            await _ws.send_str(f'{session["user"]} has left from the room {room.get_name()}')
         room.remove_ws(ws)
         self.request.app['websockets'].remove(ws)
         print('websocket connection closed')
         return ws
+

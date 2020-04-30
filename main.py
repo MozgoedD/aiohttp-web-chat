@@ -21,7 +21,16 @@ async def init_rooms(app):
     for room in rooms_in_db:
         app['rooms'].append(Room(app['db_cursor'], room[1]))
         
-    print('rooms has been initialized', app['rooms'])
+    print('SRV: rooms has been initialized', app['rooms'], '\n')
+
+async def init_users(app):
+        sql_query = f"""SELECT login FROM users;"""
+        await app['db_cursor'].execute(sql_query)
+        user_db_list = await app['db_cursor'].fetchall()
+        user_list = []
+        for user in user_db_list:
+            app['users'].append(user[0])
+        print('SRV: users has been initialized', app['users'], '\n')
 
 async def init_app():
     app = web.Application(middlewares=[
@@ -39,8 +48,10 @@ async def init_app():
     await start_db(app)
     app['websockets'] = []
     app['rooms'] = []
+    app['private_rooms'] = []
+    app['users'] = []
     await init_rooms(app)
-
+    await init_users(app)
 
     return app
 

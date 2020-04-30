@@ -16,7 +16,6 @@ class Message():
         sql_query = f"""SELECT user_login, text FROM messages WHERE room = {self.room_id} ORDER BY datetime;"""
         await self.db_cursor.execute(sql_query)
         messages = await self.db_cursor.fetchall()
-        print(messages, type(messages))
         return messages
 
 class Room():

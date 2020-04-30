@@ -8,7 +8,7 @@ async def start_db(app):
     cursor = await connection.cursor()
     app['db_cursor'] = cursor
     app['db_connection'] = connection
-    print(f'SRV: start db')
+    print(f'SRV: start db \n')
 
 
 

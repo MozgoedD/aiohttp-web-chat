@@ -1,4 +1,5 @@
-from chat.views import Index, WS, Chat, RoomCreate, ChatTo, SecretRoomCreate
+from chat.views import Index, WS, Chat, RoomCreate, ChatTo 
+from private_chat.views import PrivateChats, PrivateChatTo, Private_WS
 from auth.views import Login, Signin, Logout
 
 # Rooms replace by chat
@@ -9,9 +10,10 @@ routes = [
     ('GET', '/create_room', RoomCreate, 'create_room'),
     ('POST', '/create_room', RoomCreate, 'create_room'),
 
-    ('GET', '/create_secret_room', SecretRoomCreate, 'create_secret_room'),
-    ('POST', '/create_secret_room', SecretRoomCreate, 'create_secret_room'),
-    
+    ('GET', '/private', PrivateChats, 'private_chat'),
+    ('GET', '/private/{conversation}', PrivateChatTo, 'private_chat_to'),
+    ('GET', '/private_ws/{conversation}', Private_WS, 'private_ws'),
+
     ('GET', '/chat/{room}', ChatTo, 'to_chat'),
     ('GET', '/ws/{room}', WS, 'ws'),
     ('GET', '/login', Login, 'login'),

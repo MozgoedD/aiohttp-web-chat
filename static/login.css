@@ -58,6 +58,13 @@ button {
     cursor: pointer;
   }
 
+.message {
+  color: #38676B;
+  font-weight: normal;
+  font-size: 1.3em;
+  margin-top: .7em;
+}
+
 .inputs {
     display: flex;
 }
