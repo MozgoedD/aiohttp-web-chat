@@ -13,16 +13,16 @@ web chat
     <!-- <div class="left"> -->
       <div class="menu">
         <section class="buttons">
-          <a href="{{ app.router['logout'].url_for() }}"><img src="{{ url('static', filename='red.png') }}" alt="red"></a>
-          <a href="{{ app.router['private_chat'].url_for() }}"><img src="{{ url('static', filename='yellow.png') }}" alt="yellow"></a>
-          <a href="{{ app.router['create_room'].url_for() }}"><img src="{{ url('static', filename='green.png') }}" alt="green"></a>
+          <a href="{{ app.router['logout'].url_for() }}"><img class ="button" src="{{ url('static', filename='red.png') }}" alt="red"></a>
+          <a href="{{ app.router['private_chat'].url_for() }}"><img class ="button" src="{{ url('static', filename='yellow.png') }}" alt="yellow"></a>
+          <a href="{{ app.router['create_room'].url_for() }}"><img class ="button" src="{{ url('static', filename='green.png') }}" alt="green"></a>
         </section>  
-        <h1>@{{user_name}}</h1>
+        <h1>@{{user_name}}:{{room_name}}</h1>
       </div>
       <div class="rooms_list">
           <ul>
           {% for room in rooms %}
-          <li><a href="{{ app.router['to_chat'].url_for(room=room.get_name()) }}">{{ room.get_name() }}</a></li>
+          <li class='rooms'><a href="{{ app.router['to_chat'].url_for(room=room.get_name()) }}">{{ room.get_name() }}</a></li>
           {% endfor %}
           </ul>
       </div>

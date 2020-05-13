@@ -55,43 +55,46 @@ body{
   margin: 0;
   font-size: 1em;
   border: none;
-  width: 684%;
+  width: 694%;
 }
 
 .message-input input[type=text]:focus {
   border: none;
 }
-
 #send-button {
   border: none;
   background-color: #38676B;
   color: white;
   padding: 5px;
-  width: 200%;
+  width: 210%;
   margin: 3px;
   margin-left: 495%;
 }
-
-
 .menu {
   background-color: white;
   padding: 1em 1em 0;
+  height: 30px;
   margin: 0;
   display: grid;
   grid-template-columns: 30% auto;
   grid-area: header;
 }
-
 .buttons {
-  margin-right: -1.5em;
+  margin: 0;
+  margin-right: -0.5em;
   padding: 0;
+  width: 70px;
 }
+.button {
+  height: 20px;
+}
+
 .menu h1 {
   text-align: center;
   font-weight: normal;
   padding: 0;
-  margin-top: -0.25em;
-  font-size: 2.1em;
+  margin-top: -0.15em;
+  font-size: 1.0em;
   color: #38676B;
 }
 
@@ -115,10 +118,31 @@ body{
   background-color: #E2E3E8;
   grid-area: rooms;
   overflow-y: scroll;
+  align-content: flex-start;
 }
 .rooms_list ul{
   list-style-type: none;
 }
+.rooms A {
+  display: inline-block;
+  padding: .2em 0;
+  background-color: #38676B;
+  width: 90%;
+  text-align: center;
+  border-radius: .6em;
+  cursor: pointer;
+  margin-top: .5em;
+}
+A:link {
+  text-decoration: none;
+  color: white;
+}
+
+A:visited {
+  text-decoration: none;
+  color: white;
+} 
+
 .grid {
   display: grid;
   width: 100vw;

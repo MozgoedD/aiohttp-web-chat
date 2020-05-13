@@ -3,6 +3,7 @@ from aiohttp_session import session_middleware
 from aiohttp_session.cookie_storage import EncryptedCookieStorage
 import aiohttp_jinja2
 import jinja2
+import socket
 
 from routes import setup_routes
 from middleware import authorize
@@ -57,7 +58,7 @@ async def init_app():
 
 def main():
     app = init_app()
-    web.run_app(app)
+    web.run_app(app, port='80', reuse_address=True, reuse_port=True)
 
 if __name__ == '__main__':
     main()

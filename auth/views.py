@@ -7,8 +7,6 @@ import json
 from auth.models import User
 
 
-# wrong_enter = False
-# wrong_signin = False
 
 def set_session(session, user_id, request):
     session['user'] = str(user_id)
@@ -27,22 +25,22 @@ class Login(web.View):
         session = await get_session(self.request)
         if session.get('user'):
             redirect(self.request, 'chat')
-        # global wrong_enter
-        # if wrong_enter == True:
-        #     return {'message': 'Wrong Login/Password'}
+        if session.get('enter_problems'):
+            del session['enter_problems']
+            return {'message': 'Wrong Login/Password'}
 
     async def post(self):
         data = await self.request.post()
         user = User(self.request.app['db_cursor'], data)
         result = await user.log_in()
-        # global wrong_enter
+        session = await get_session(self.request)
         if result:
             print(f'SRV: {data["login"]} logged in')
-            # wrong_enter = False
-            session = await get_session(self.request)
+            if session.get('enter_problems'):
+                del session['enter_problems']
             set_session(session, str(data['login']), self.request)
         else: 
-            # wrong_enter = True
+            session['enter_problems'] = True
             redirect(self.request, 'login')
 
 
@@ -54,23 +52,24 @@ class Signin(web.View):
         session = await get_session(self.request)
         if session.get('user'):
             redirect(self.request, 'chat')
-        # global wrong_signin
-        # if wrong_signin:
-        #     return {'message': 'User with this login already exist!'}
+        if session.get('enter_problems'):
+            del session['enter_problems']
+            return {'message': 'User with this login already exist!'}
 
     async def post(self):
         data = await self.request.post()
         user = User(self.request.app['db_cursor'], data)
         result = await user.create_user()
-        # global wrong_signin
+        session = await get_session(self.request)
         if not result:
-            # wrong_signin = True
+            session['enter_problems'] = True
             redirect(self.request, 'signin')
         else:
-            print(f'SRV: new user created {data["login"]} {data["password"]}')
-            # wrong_signin = False
-            self.request.app['users'].append(data('login'))
-            session = await get_session(self.request)
+            user_login = str(data["login"])
+            print(f'SRV: new user created {data["login"]}')
+            if session.get('enter_problems'):
+                del session['enter_problems']
+            self.request.app['users'].append(user_login)
             set_session(session, str(data['login']), self.request)
             
 

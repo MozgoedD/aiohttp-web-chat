@@ -19,19 +19,27 @@ body {
 
 .mountain h1 {
     font-weight: normal;
-    margin-bottom: 0em;
+    margin-top: -.1em;
     font-size: 5em;
-    position: relative;
+    /* position: relative; */
     color: #38676B;
 }
 
 .mountain h2 {
     font-weight: normal;
-    margin-top: 0em;
+    margin-bottom: 0em;
     font-size: 2.1em;
     color: #38676B;
+    
 }
-/* #DBD7E3 #38676B*/
+.mountain h3 {
+    font-weight: normal;
+    margin-top: 0em;
+    margin-bottom: 0em;
+    font-size: 2.1em;
+    color: #38676B;
+    letter-spacing: .225em;
+}
 .buttons {
     text-align: center;
     background-color: #95A7AD; 

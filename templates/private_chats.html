@@ -13,15 +13,15 @@ web chat
     <!-- <div class="left"> -->
       <div class="menu">
         <section class="buttons">
-          <a href="{{ app.router['logout'].url_for() }}"><img src="{{ url('static', filename='red.png') }}" alt="red"></a>
-          <a href="{{ app.router['chat'].url_for() }}"><img src="{{ url('static', filename='yellow.png') }}" alt="yellow"></a>
+          <a href="{{ app.router['logout'].url_for() }}"><img class ="button" src="{{ url('static', filename='red.png') }}" alt="red"></a>
+          <a href="{{ app.router['chat'].url_for() }}"><img class ="button" src="{{ url('static', filename='yellow.png') }}" alt="yellow"></a>
         </section>  
         <h1>@{{user_name}}:{{conversation}}</h1>
       </div>
       <div class="rooms_list">
           <ul>
           {% for user in user_list %}
-          <li><a href="{{ app.router['private_chat_to'].url_for(conversation=user)}}">{{ user }}</a></li>
+          <li class='rooms'><a href="{{ app.router['private_chat_to'].url_for(conversation=user)}}">{{ user }}</a></li>
           {% endfor %}
           </ul>
       </div>
@@ -38,7 +38,24 @@ web chat
 {% endblock %}
 
 {% block footer %}
+    <script language="JavaScript" type="text/javascript" src="{{ url('static', filename='cryptico/jsbn.js') }}"></script>
+    <script language="JavaScript" type="text/javascript" src="{{ url('static', filename='cryptico/random.js') }}"></script>
+    <script language="JavaScript" type="text/javascript" src="{{ url('static', filename='cryptico/hash.js') }}"></script>
+    <script language="JavaScript" type="text/javascript" src="{{ url('static', filename='cryptico/rsa.js') }}"></script>
+    <script language="JavaScript" type="text/javascript" src="{{ url('static', filename='cryptico/aes.js') }}"></script>
+    <script language="JavaScript" type="text/javascript" src="{{ url('static', filename='cryptico/api.js') }}"></script>
+    <script language="JavaScript" type="text/javascript" src="{{ url('static', filename='cryptico/cryptico.js') }}"></script>
+
     <script type="text/javascript">var user_name = "{{user_name}}";</script>
     <script type="text/javascript">var WS_URL = "{{ app.router['private_ws'].url_for(conversation=conversation) }}";</script>
     <script src="{{ url('static', filename='private_chat.js') }}"></script>
+
+    <!-- <script src="{{ url('static', filename='cryptico/jsbn.js') }}"></script>
+    <script src="{{ url('static', filename='cryptico/random.js') }}"></script>
+    <script src="{{ url('static', filename='cryptico/hash.js') }}"></script>
+    <script src="{{ url('static', filename='cryptico/rsa.js') }}"></script>
+    <script src="{{ url('static', filename='cryptico/aes.js') }}"></script>
+    <script src="{{ url('static', filename='cryptico/api.js') }}"></script>
+    <script src="{{ url('static', filename='cryptico/cryptico.js') }}"></script> -->
+
 {% endblock %}

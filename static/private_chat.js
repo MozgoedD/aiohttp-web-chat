@@ -5,6 +5,10 @@ const messageContainer = document.getElementById('message-container');
 appendMessage('Private Chat mode');
 
 var socket = new WebSocket('ws://' + window.location.host + WS_URL);
+var SecondPublicKey = '';
+var RSAkey = ''
+console.log(RSAkey);
+
 
 function appendMessage(message) {
     const messageElement = document.createElement('div')
@@ -24,6 +28,17 @@ function your_appendMessage(message) {
 
 socket.onopen = function() {
     appendMessage('You connected');
+
+    var array = new Uint32Array(2);
+    window.crypto.getRandomValues(array);
+    var PassPhrase = '' + array[0] + array[1];
+    console.log(PassPhrase)
+    var Bits = 1024; 
+    RSAkey = cryptico.generateRSAKey(PassPhrase, Bits);
+    var PublicKeyString = cryptico.publicKeyString(RSAkey);
+    appendMessage('Keys has been generated');
+    appendMessage('Please wait for the connection with your interlocutor');
+    socket.send(`PublicKey:${PublicKeyString}`);
   };
 
 socket.onclose = function(event){
@@ -35,25 +50,34 @@ socket.onclose = function(event){
 };
 
 socket.onmessage = function(event) {
-    console.log(event.data)
     var message = event.data;
-    if (message.startsWith(`${user_name}:`)) {
-        message = message.split(":").pop();
-        if (message === " " || message === "  ") {your_appendMessage(`[empty message ${message}]`);}
-        else {
-            your_appendMessage(`${message}`);
-        }
+    if (message.startsWith('PublicKey:')) {
+        SecondPublicKey = message.slice(10);
+        appendMessage('Сonnection with your interlocutor has been established!');
     }
     else {
-        appendMessage(event.data)
+        var DecryptionResult = cryptico.decrypt(message, RSAkey);
+        if (DecryptionResult.plaintext === undefined) {
+            appendMessage(message);
+        }
+        else {
+            appendMessage(DecryptionResult.plaintext);
+        }
     }
+    
 };
 
 messageForm.addEventListener('submit', e => {
     e.preventDefault()
     const message = messageInput.value
+
+    // var EncryptionResult = cryptico.encrypt(message, MattsPublicKeyString);
+
+    // var DecryptionResult = cryptico.decrypt(EncryptionResult.cipher, MattsRSAkey);
     your_appendMessage(`${message}`)
-    socket.send(message);
+
+    var EncryptionResult = cryptico.encrypt(message, SecondPublicKey);
+    socket.send(EncryptionResult.cipher);
     messageInput.value = ''
 })
 
