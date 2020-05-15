@@ -4,7 +4,7 @@ from time import strftime
 import aiohttp_jinja2
 import json
 
-from chat.models import Message, Room
+from chat.models import Message, Room, UserInChat
 from auth.models import User
 
 def redirect(request, router_name):
@@ -73,9 +73,12 @@ class WS(web.View):
         session = await get_session(self.request)
         await ws.send_str(f'Welcome to the room {room.get_name()}! You entered as: {session["user"]} ')
         room_id = await room.get_room_id()
-        message = Message(self.request.app['db_cursor'], session['user'], room_id)
+        user = UserInChat(self.request.app['db_cursor'], session['user'])
+        user_id = await user.get_user_id()
+        message = Message(self.request.app['db_cursor'], user_id, room_id)
 
         messages_list = await message.get_messages()
+        print(messages_list)
         if messages_list:
             for message_in_db in messages_list:
                 await ws.send_str(f'{message_in_db[0]}: {message_in_db[1]}')

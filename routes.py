@@ -2,8 +2,6 @@ from chat.views import Index, WS, Chat, RoomCreate, ChatTo
 from private_chat.views import PrivateChats, PrivateChatTo, Private_WS
 from auth.views import Login, Signin, Logout
 
-# Rooms replace by chat
-
 routes = [
     ('GET', '/index', Index, 'index'),
     ('GET', '/chat', Chat, 'chat'),

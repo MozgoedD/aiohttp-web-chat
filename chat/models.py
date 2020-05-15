@@ -8,15 +8,26 @@ class Message():
         self.room_id = int(room_id)
 
     async def save_message(self, text, datetime):
-        sql_query = f"""INSERT INTO messages (user_login, room, text, datetime)
+        sql_query = f"""INSERT INTO messages (user_id, room_id, text, datetime)
                     VALUES ('{self.user}', '{self.room_id}', '{text}', '{datetime}');"""
         await self.db_cursor.execute(sql_query)
 
     async def get_messages(self):
-        sql_query = f"""SELECT user_login, text FROM messages WHERE room = {self.room_id} ORDER BY datetime;"""
+        sql_query = f"""SELECT login, text FROM users, messages WHERE room_id = {self.room_id} AND users.id = user_id ORDER BY messages.id;"""
         await self.db_cursor.execute(sql_query)
         messages = await self.db_cursor.fetchall()
         return messages
+
+class UserInChat():
+    def __init__(self, db, name):
+        self.db_cursor = db
+        self.name = name
+
+    async def get_user_id(self):
+        sql_query = f"""SELECT id FROM users WHERE login='{str(self.name)}';"""
+        await self.db_cursor.execute(sql_query)
+        room_id = await self.db_cursor.fetchall()
+        return room_id[0][0]
 
 class Room():
     
