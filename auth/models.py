@@ -1,12 +1,15 @@
 
+import hashlib
 
-
-class User():
-    
-    def __init__(self, db, data):
+class User:
+    #конструктор класса User
+    def __init__(self, db, data): 
         self.db_cursor = db
         self.login = data.get('login')
-        self.password = data.get('password')
+        self._password = data.get('password')
+        hash_object = hashlib.sha256(self._password.encode())
+        self.password = hash_object.hexdigest()
+
 
     async def check_user(self):
         sql_query = f"""SELECT login FROM users WHERE login='{str(self.login)}';"""

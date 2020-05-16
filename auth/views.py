@@ -4,6 +4,7 @@ from time import time
 import aiohttp_jinja2
 import json 
 
+
 from auth.models import User
 
 
@@ -19,7 +20,7 @@ def redirect(request, router_name):
     raise web.HTTPFound(url)
 
 class Login(web.View):
-
+    
     @aiohttp_jinja2.template('login.html')
     async def get(self):
         session = await get_session(self.request)

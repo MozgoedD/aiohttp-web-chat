@@ -45,7 +45,10 @@ socket.onmessage = function(event) {
         }
     }
     else {
+        if (message === " " || message === "  ") {your_appendMessage(`[empty message ${message}]`);}
+        else {
         appendMessage(event.data)
+        }
     }
 };
 
