@@ -61,7 +61,12 @@ socket.onmessage = function(event) {
             appendMessage(message);
         }
         else {
-            appendMessage(DecryptionResult.plaintext);
+            if (DecryptionResult.signature === 'verified') {
+                appendMessage(DecryptionResult.plaintext);
+            }
+            else {
+                appendMessage('Message is not verified!');
+            }
         }
     }
     
@@ -70,13 +75,8 @@ socket.onmessage = function(event) {
 messageForm.addEventListener('submit', e => {
     e.preventDefault()
     const message = messageInput.value
-
-    // var EncryptionResult = cryptico.encrypt(message, MattsPublicKeyString);
-
-    // var DecryptionResult = cryptico.decrypt(EncryptionResult.cipher, MattsRSAkey);
     your_appendMessage(`${message}`)
-
-    var EncryptionResult = cryptico.encrypt(message, SecondPublicKey);
+    var EncryptionResult = cryptico.encrypt(message, SecondPublicKey, RSAkey);
     socket.send(EncryptionResult.cipher);
     messageInput.value = ''
 })
